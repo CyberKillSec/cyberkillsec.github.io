@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CyberKillSec | Portfolio Cybersécurité</title>
+  <meta name="description" content="Portfolio cybersécurité orienté offensive security, pentest, lab, systèmes, réseaux et progression technique." />
+  <style>
+    :root {
+      --bg: #070b12;
+      --bg-soft: rgba(255,255,255,0.04);
+      --bg-card: rgba(0,0,0,0.28);
+      --line: rgba(255,255,255,0.10);
+      --line-strong: rgba(34,211,238,0.28);
+      --text: #e5eef7;
+      --muted: #9fb0c4;
+      --cyan: #67e8f9;
+      --cyan-2: #22d3ee;
+      --violet: #c084fc;
+      --green: #86efac;
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
+      --radius: 28px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(34,211,238,0.12), transparent 30%),
+        radial-gradient(circle at bottom, rgba(168,85,247,0.10), transparent 28%),
+        linear-gradient(180deg, #070b12 0%, #081019 100%);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.06;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.14) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.14) 1px, transparent 1px);
+      background-size: 38px 38px;
+      z-index: 0;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(10px);
+      background: rgba(7, 11, 18, 0.72);
+      border-bottom: 1px solid rgba(103, 232, 249, 0.10);
+    }
+
+    .topbar-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand small {
+      display: block;
+      color: rgba(103, 232, 249, 0.85);
+      text-transform: uppercase;
+      letter-spacing: 0.32em;
+      font-size: 11px;
+      margin-bottom: 6px;
+    }
+
+    .brand strong {
+      font-size: 1.45rem;
+      letter-spacing: 0.03em;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    nav a {
+      color: #c8d5e3;
+      font-size: 0.95rem;
+      transition: 0.2s ease;
+    }
+
+    nav a:hover { color: var(--cyan); }
+
+    .hero {
+      padding: 72px 0 56px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid rgba(103,232,249,0.22);
+      background: rgba(34,211,238,0.07);
+      color: #c9f7ff;
+      border-radius: 999px;
+      padding: 12px 16px;
+      font-size: 0.92rem;
+      box-shadow: 0 10px 30px rgba(8, 20, 35, 0.35);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 16px rgba(103,232,249,0.9);
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.25); opacity: 0.7; }
+    }
+
+    .hero h1 {
+      margin: 22px 0 0;
+      font-size: clamp(2.6rem, 6vw, 5.3rem);
+      line-height: 0.98;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+    }
+
+    .gradient-text {
+      display: block;
+      background: linear-gradient(90deg, var(--cyan), #57b9ff, var(--violet));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 24px 0 0;
+      color: #c1cedb;
+      font-size: 1.08rem;
+      line-height: 1.9;
+    }
+
+    .hero p span { color: var(--cyan); }
+
+    .buttons {
+      margin-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-block;
+      border-radius: 18px;
+      padding: 14px 20px;
+      font-weight: 600;
+      font-size: 0.96rem;
+      transition: 0.22s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      color: #eafcff;
+      background: rgba(34,211,238,0.10);
+      border-color: rgba(103,232,249,0.30);
+      box-shadow: 0 18px 40px rgba(8, 29, 46, 0.35);
+    }
+
+    .btn-primary:hover { background: rgba(34,211,238,0.16); }
+
+    .btn-secondary {
+      color: #eef4fa;
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.10);
+    }
+
+    .btn-secondary:hover { background: rgba(255,255,255,0.10); }
+
+    .panel, .timeline-card, .project-card, .contact-card, .roadmap, .terminal, .about-card {
+      border: 1px solid var(--line);
+      background: var(--bg-soft);
+      backdrop-filter: blur(8px);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .panel {
+      padding: 26px;
+    }
+
+    .status-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #97a7b8;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.30em;
+    }
+
+    .status-online { color: var(--cyan); }
+
+    .status-stack {
+      margin-top: 18px;
+      display: grid;
+      gap: 14px;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 0.95rem;
+    }
+
+    .status-box {
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,0.28);
+      border-radius: 20px;
+      padding: 15px 16px;
+    }
+
+    .status-box .label {
+      color: #6d7d90;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .status-box .value { color: #dce9f6; }
+    .status-box .accent { color: var(--cyan); }
+    .status-box .green { color: var(--green); }
+
+    section {
+      padding: 20px 0;
+    }
+
+    .section-tag {
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.30em;
+      font-size: 0.82rem;
+      margin: 0 0 10px;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.1;
+    }
+
+    .lead-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .about-card {
+      padding: 34px;
+    }
+
+    .about-card p {
+      color: #c2cfdb;
+      line-height: 1.9;
+      font-size: 1rem;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .mini-box {
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,0.20);
+      border-radius: 20px;
+      padding: 18px;
+    }
+
+    .mini-box .label {
+      color: #78889a;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.24em;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .mini-box .value { font-weight: 600; }
+
+    .chips {
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .chip {
+      border-radius: 999px;
+      padding: 11px 15px;
+      border: 1px solid rgba(103,232,249,0.18);
+      background: rgba(34,211,238,0.08);
+      color: #d8faff;
+      font-size: 0.95rem;
+    }
+
+    .timeline {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .timeline-card {
+      padding: 24px;
+    }
+
+    .timeline-num {
+      font-size: 3rem;
+      font-weight: 900;
+      color: rgba(34,211,238,0.28);
+      line-height: 1;
+    }
+
+    .timeline-card h3 {
+      margin: 16px 0 0;
+      font-size: 1.25rem;
+    }
+
+    .timeline-card p {
+      margin: 14px 0 0;
+      color: #b9c7d4;
+      line-height: 1.8;
+    }
+
+    .projects-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .projects-head .note {
+      max-width: 560px;
+      color: #93a4b6;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .project-card {
+      padding: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      transition: transform 0.22s ease, border-color 0.22s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--line-strong);
+    }
+
+    .project-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #7f91a4;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.30em;
+    }
+
+    .project-card h3 {
+      margin: 18px 0 0;
+      font-size: 1.6rem;
+    }
+
+    .project-card p {
+      margin: 14px 0 0;
+      color: #bcc9d6;
+      line-height: 1.8;
+    }
+
+    .tags {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      border-radius: 999px;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,0.22);
+      color: #d0dbe7;
+      font-size: 0.78rem;
+    }
+
+    .roadmap {
+      padding: 34px;
+      background: linear-gradient(90deg, rgba(34,211,238,0.10), rgba(192,132,252,0.10));
+    }
+
+    .roadmap-grid {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .roadmap-step {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 18px;
+      background: rgba(0,0,0,0.24);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.9fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .contact-card {
+      padding: 30px;
+    }
+
+    .contact-card p {
+      color: #bfccd8;
+      line-height: 1.85;
+    }
+
+    .contact-list {
+      margin-top: 24px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .contact-item {
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,0.22);
+      border-radius: 20px;
+      padding: 16px;
+    }
+
+    .contact-item .label {
+      color: #78889b;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.24em;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .contact-item a { color: var(--cyan); }
+
+    .terminal {
+      padding: 26px;
+      background: rgba(0,0,0,0.30);
+      font-family: Consolas, Monaco, monospace;
+      font-size: 0.95rem;
+    }
+
+    .term-dots {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .term-dots span {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .term-dots span:nth-child(1) { background: rgba(251,113,133,0.75); }
+    .term-dots span:nth-child(2) { background: rgba(251,191,36,0.75); }
+    .term-dots span:nth-child(3) { background: rgba(74,222,128,0.75); }
+
+    .terminal p { margin: 0 0 10px; color: #c8d6e3; }
+    .terminal .cmd { color: var(--cyan); }
+    .terminal .out { color: #ffffff; }
+
+    footer {
+      padding: 28px 0 48px;
+      color: #8395a9;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 1050px) {
+      .hero-grid,
+      .lead-grid,
+      .contact-grid,
+      .timeline,
+      .projects,
+      .roadmap-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero { padding-top: 56px; }
+    }
+
+    @media (max-width: 760px) {
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 16px 0;
+      }
+
+      nav { gap: 12px 16px; }
+      .mini-grid { grid-template-columns: 1fr; }
+      .about-card, .roadmap, .contact-card, .terminal, .panel { padding: 22px; }
+      .hero h1 { font-size: 2.5rem; }
+      .section-title { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <small>Cyber Portfolio</small>
+        <strong>CYBERKILLSEC</strong>
+      </div>
+      <nav>
+        <a href="#about">Présentation</a>
+        <a href="#skills">Compétences</a>
+        <a href="#journey">Parcours</a>
+        <a href="#projects">Projets</a>
+        <a href="#certs">Certifs</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="pill">
+            <span class="dot"></span>
+            Offensive Security • Pentest • DevSecOps Mindset
+          </div>
+
+          <h1>
+            Portfolio
+            <span class="gradient-text">cybersécurité</span>
+          </h1>
+
+          <p>
+            Je construis un profil technique orienté <span>cybersécurité offensive</span>, avec une approche sérieuse fondée sur les systèmes, les réseaux, la virtualisation, la méthodologie pentest et l’entraînement pratique en laboratoire.
+          </p>
+
+          <div class="buttons">
+            <a class="btn btn-primary" href="#projects">Voir mes projets</a>
+            <a class="btn btn-secondary" href="#contact">Me contacter</a>
+          </div>
+        </div>
+
+        <aside class="panel">
+          <div class="status-head">
+            <span>Status</span>
+            <span class="status-online">Online</span>
+          </div>
+
+          <div class="status-stack">
+            <div class="status-box">
+              <span class="label">role</span>
+              <div class="value accent">Offensive Security Learner</div>
+            </div>
+            <div class="status-box">
+              <span class="label">focus</span>
+              <div class="value">Pentest · Labs · Systèmes · Réseaux</div>
+            </div>
+            <div class="status-box">
+              <span class="label">roadmap</span>
+              <div class="value">eJPT → PNPT → OSCP</div>
+            </div>
+            <div class="status-box">
+              <span class="label">mode</span>
+              <div class="value green">Learning / Building / Practicing</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="about-card panel">
+          <p class="section-tag">Présentation</p>
+          <div class="lead-grid">
+            <div>
+              <h2 class="section-title">Un profil en construction, avec une vraie logique terrain</h2>
+              <p>
+                Mon objectif est de bâtir une expertise crédible et opérationnelle en cybersécurité, en partant de bases solides : administration Windows / Linux, fondamentaux réseau, virtualisation, scripting, hygiène de sécurité, méthodologie offensive et entraînement progressif.
+              </p>
+            </div>
+
+            <div class="mini-grid">
+              <div class="mini-box">
+                <span class="label">Approche</span>
+                <div class="value">Technique, structurée et progressive</div>
+              </div>
+              <div class="mini-box">
+                <span class="label">Orientation</span>
+                <div class="value">Cybersécurité offensive</div>
+              </div>
+              <div class="mini-box">
+                <span class="label">Méthode</span>
+                <div class="value">Pratique + documentation</div>
+              </div>
+              <div class="mini-box">
+                <span class="label">Vision</span>
+                <div class="value">Compétence réelle avant tout</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <p class="section-tag">Compétences</p>
+        <h2 class="section-title">Socle technique en développement</h2>
+        <div class="chips">
+          <span class="chip">Linux / Windows</span>
+          <span class="chip">Réseaux TCP/IP</span>
+          <span class="chip">Virtualisation</span>
+          <span class="chip">Hardening système</span>
+          <span class="chip">Reconnaissance</span>
+          <span class="chip">Web security</span>
+          <span class="chip">Active Directory</span>
+          <span class="chip">Python / Bash / PowerShell</span>
+          <span class="chip">Git / GitHub</span>
+          <span class="chip">Wireshark / Nmap</span>
+          <span class="chip">Labs Red Team / Blue Team</span>
+          <span class="chip">Méthodologie pentest</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="journey">
+      <div class="container">
+        <p class="section-tag">Parcours</p>
+        <h2 class="section-title">Progression structurée</h2>
+        <div class="timeline">
+          <article class="timeline-card">
+            <div class="timeline-num">01</div>
+            <h3>Reconversion vers la cybersécurité offensive</h3>
+            <p>Construction progressive d’un socle solide en systèmes, réseaux, sécurité et pratique en laboratoire personnel pour évoluer vers le pentest professionnel.</p>
+          </article>
+          <article class="timeline-card">
+            <div class="timeline-num">02</div>
+            <h3>Montée en compétence méthodique</h3>
+            <p>Administration systèmes, réseau, virtualisation, scripting, sécurité offensive, documentation technique et entraînement continu sur des environnements de test.</p>
+          </article>
+          <article class="timeline-card">
+            <div class="timeline-num">03</div>
+            <h3>Objectif professionnel</h3>
+            <p>Développer un profil opérationnel orienté pentest / offensive security, avec une forte base technique et une vision long terme tournée vers DevSecOps.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="projects-head">
+          <div>
+            <p class="section-tag">Projets</p>
+            <h2 class="section-title">Labs, pratique et progression</h2>
+          </div>
+          <p class="note">Chaque carte peut ensuite être enrichie avec captures, write-ups autorisés, architecture, outils utilisés et retours d’expérience.</p>
+        </div>
+
+        <div class="projects">
+          <article class="project-card">
+            <div class="project-top">
+              <span>Project</span>
+              <span>↗</span>
+            </div>
+            <h3>Cyber Lab Personnel</h3>
+            <p>Conception d’un laboratoire isolé pour pratiquer la virtualisation, l’administration système, la segmentation réseau, les tests d’attaque/défense et la documentation technique.</p>
+            <div class="tags">
+              <span class="tag">Virtualisation</span>
+              <span class="tag">Windows</span>
+              <span class="tag">Linux</span>
+              <span class="tag">Réseau</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-top">
+              <span>Project</span>
+              <span>↗</span>
+            </div>
+            <h3>Hardening & Services Web</h3>
+            <p>Mise en place et sécurisation de services Linux, configuration Apache / Nginx, HTTPS, gestion des permissions, logique d’exposition contrôlée et bonnes pratiques de configuration.</p>
+            <div class="tags">
+              <span class="tag">Linux</span>
+              <span class="tag">Apache</span>
+              <span class="tag">Nginx</span>
+              <span class="tag">TLS</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-top">
+              <span>Project</span>
+              <span>↗</span>
+            </div>
+            <h3>Entraînement Pentest Progressif</h3>
+            <p>Travail continu sur la reconnaissance, l’énumération, l’analyse de surface d’attaque, les bases Active Directory, la méthodologie offensive et la rédaction de notes d’exploitation.</p>
+            <div class="tags">
+              <span class="tag">Recon</span>
+              <span class="tag">AD</span>
+              <span class="tag">Méthodo</span>
+              <span class="tag">Pentest</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="certs">
+      <div class="container">
+        <div class="roadmap">
+          <p class="section-tag">Certifications</p>
+          <h2 class="section-title">Roadmap de progression</h2>
+          <div class="roadmap-grid">
+            <div class="roadmap-step">Parcours cybersécurité en cours</div>
+            <div class="roadmap-step">Préparation eJPT</div>
+            <div class="roadmap-step">Préparation PNPT</div>
+            <div class="roadmap-step">Objectif OSCP</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact-grid">
+          <div class="contact-card">
+            <p class="section-tag">Contact</p>
+            <h2 class="section-title">Disponible pour échanger</h2>
+            <p>Ce portfolio peut être relié à ton GitHub, ton LinkedIn, tes projets publics, tes write-ups autorisés, ou une adresse e-mail professionnelle.</p>
+
+            <div class="contact-list">
+              <div class="contact-item">
+                <span class="label">GitHub</span>
+                <a href="https://github.com/CyberKillSec" target="_blank" rel="noopener noreferrer">github.com/CyberKillSec</a>
+              </div>
+              <div class="contact-item">
+                <span class="label">LinkedIn</span>
+                <a href="https://www.linkedin.com/in/cyberkillsec-cyberkillx" target="_blank" rel="noopener noreferrer">linkedin.com/in/cyberkillsec-cyberkillx</a>
+              </div>
+              <div class="contact-item">
+                <span class="label">Email</span>
+                <a href="mailto:cyberkillsec@icloud.com">cyberkillsec@icloud.com</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="terminal">
+            <div class="term-dots">
+              <span></span><span></span><span></span>
+            </div>
+            <p><span class="cmd">user</span>@portfolio:~$ whoami</p>
+            <p class="out">Cybersecurity learner building a real offensive path.</p>
+            <p><span class="cmd">user</span>@portfolio:~$ cat mission.txt</p>
+            <p class="out">Build skills. Document progress. Create value. Become operational.</p>
+            <p><span class="cmd">user</span>@portfolio:~$ _</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 CyberKillSec · Portfolio cybersécurité · GitHub Pages ready
+    </div>
+  </footer>
+</body>
+</html>

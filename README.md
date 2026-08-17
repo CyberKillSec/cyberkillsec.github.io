@@ -1,2 +1,2 @@
 # cyberkillsec.github.io
-Cybersecurity Portfolio – Offensive Security / Pentest Journey
+Portfolio Cybersecurity – Offensive & Défensive Security / Pentest Journey
